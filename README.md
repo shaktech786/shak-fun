@@ -1,36 +1,135 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Shak.Fun - Play Games for Good
+
+A nostalgic game portal inspired by classic sites like Newgrounds and Miniclip, built with modern web technologies. Play intellectually stimulating games, earn points, compete on leaderboards, and support charity.
+
+## Features
+
+### Core Features
+- **User Authentication** - Email/password and Google OAuth login via Supabase
+- **Points System** - Earn and spend points playing games
+- **Game Catalog** - Browse and play various games
+- **Leaderboards** - Compete with other players globally
+- **Achievements** - Unlock achievements and earn bonus points
+- **User Profiles** - Track your stats and gaming history
+- **Charity Focus** - 100% of proceeds go to charitable causes
+
+### Tech Stack
+- **Framework**: Next.js 15 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS v4
+- **Database**: Supabase (PostgreSQL)
+- **Authentication**: Supabase Auth
+- **Deployment**: Vercel
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+- Node.js 18+
+- npm or yarn
+- Supabase account
 
+### Installation
+
+1. Install dependencies
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Set up environment variables
+```bash
+cp .env.example .env.local
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Edit `.env.local` and add your Supabase credentials:
+```env
+NEXT_PUBLIC_SUPABASE_URL=your-project-url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. Set up the database
 
-## Learn More
+- Create a new Supabase project at [supabase.com](https://supabase.com)
+- Go to SQL Editor in your Supabase dashboard
+- Run the SQL from `supabase/schema.sql`
 
-To learn more about Next.js, take a look at the following resources:
+4. Run the development server
+```bash
+npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Visit [http://localhost:3000](http://localhost:3000)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Project Structure
 
-## Deploy on Vercel
+```
+shak.fun/
+├── app/                      # Next.js app directory
+│   ├── auth/                 # Authentication pages
+│   ├── games/                # Games listing and individual games
+│   ├── profile/              # User profile page
+│   ├── leaderboard/          # Leaderboard page
+│   ├── layout.tsx            # Root layout with header/footer
+│   └── page.tsx              # Homepage
+├── components/               # React components
+│   ├── ui/                   # Reusable UI components
+│   ├── games/                # Game-related components
+│   └── auth/                 # Auth-related components
+├── lib/                      # Utility functions and hooks
+│   ├── supabase/             # Supabase clients
+│   ├── hooks/                # Custom React hooks
+│   └── utils/                # Helper functions
+├── types/                    # TypeScript type definitions
+├── supabase/                 # Database schema and migrations
+└── public/                   # Static assets
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Database Schema
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Tables
+- **profiles** - User profiles with points and stats
+- **games** - Game catalog with metadata
+- **scores** - User game scores and points earned
+- **achievements** - Achievement definitions
+- **user_achievements** - User-unlocked achievements
+
+See `supabase/schema.sql` and `SETUP.md` for full details.
+
+## Design System
+
+### Colors
+- **Primary**: Blue (#3b82f6)
+- **Secondary**: Amber (#f59e0b)
+- **Accent**: Purple (#8b5cf6)
+
+### Style
+- Retro-inspired shadows and borders
+- Smooth animations and transitions
+- Modern gradient backgrounds
+- Nostalgic 2005 game portal aesthetic
+
+## Adding Games
+
+Games are React components in `components/games/`. Each game should:
+1. Accept `onGameEnd(score: number)` callback prop
+2. Handle its own game logic and rendering
+3. Call callback when game completes
+
+See `SETUP.md` for detailed instructions.
+
+## Deployment
+
+Deploy to Vercel (already configured):
+
+```bash
+vercel
+```
+
+Make sure to add environment variables in Vercel dashboard.
+
+## Charity Mission
+
+100% of proceeds from this platform go to charitable causes. Our goal is to make gaming a force for good.
+
+---
+
+Built with ❤️ for charity

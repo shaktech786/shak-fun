@@ -1,26 +1,109 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Light, airy palette inspired by calm spaces */
+  --background: #fafafa;
+  --foreground: #1a1a1a;
+  --primary: #2d3748;
+  --primary-light: #4a5568;
+  --accent: #667eea;
+  --accent-soft: #e3e8ff;
+  --success: #48bb78;
+  --danger: #f56565;
+  --warm: #f6ad55;
+  --card-bg: #ffffff;
+  --card-border: #e8e8e8;
+  --hover-bg: #f7f7f7;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-primary: var(--primary);
+  --color-primary-light: var(--primary-light);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-success: var(--success);
+  --color-danger: var(--danger);
+  --color-warm: var(--warm);
+  --color-card-bg: var(--card-bg);
+  --color-card-border: var(--card-border);
+  --color-hover-bg: var(--hover-bg);
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Gentle fade-in for page loads */
+@keyframes gentle-fade {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Subtle lift on hover */
+@keyframes soft-lift {
+  to {
+    transform: translateY(-2px);
+  }
+}
+
+.animate-fade {
+  animation: gentle-fade 0.4s ease-out;
+}
+
+.hover-lift {
+  transition: transform 75ms ease-in-out, box-shadow 75ms ease-in-out;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Minimal shadows */
+.soft-shadow {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.soft-shadow-md {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.soft-shadow-lg {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Playful accent */
+.accent-underline {
+  position: relative;
+}
+
+.accent-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 150ms ease-out;
+}
+
+.accent-underline:hover::after {
+  transform: scaleX(1);
 }
