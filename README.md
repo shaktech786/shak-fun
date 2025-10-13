@@ -1,135 +1,149 @@
-# Shak.Fun - Play Games for Good
+# Shak.Fun - Thoughtful Games
 
-A nostalgic game portal inspired by classic sites like Newgrounds and Miniclip, built with modern web technologies. Play intellectually stimulating games, earn points, compete on leaderboards, and support charity.
+A relaxing collection of creative, pixelated games. Inspired by neal.fun and classic game portals, built with modern web technologies. No ads, no accounts, no distractions - just thoughtful games.
 
 ## Features
 
-### Core Features
-- **User Authentication** - Email/password and Google OAuth login via Supabase
-- **Points System** - Earn and spend points playing games
-- **Game Catalog** - Browse and play various games
-- **Leaderboards** - Compete with other players globally
-- **Achievements** - Unlock achievements and earn bonus points
-- **User Profiles** - Track your stats and gaming history
-- **Charity Focus** - 100% of proceeds go to charitable causes
+### Core Features (Phase 1 - Infrastructure)
+- **Game Catalog** - Clean, minimal browsing experience
+- **Pixelated Aesthetic** - Retro gaming visual style with crisp pixel art
+- **Accessible Design** - WCAG 2.1 AA compliant, neurodivergent-friendly
+- **Performance Monitoring** - Vercel Speed Insights integration
+- **Future Plans** - Charitable giving integration (Phase 3)
+
+### Current Status
+- ✅ Site infrastructure complete
+- ✅ Minimal, accessible design system
+- 🚧 Games coming in Phase 2
+- 🔮 Charity integration planned for Phase 3
 
 ### Tech Stack
-- **Framework**: Next.js 15 (App Router)
+- **Framework**: Next.js 15.5.4 (App Router with Turbopack)
+- **Runtime**: Node.js v24.10.0
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS v4
-- **Database**: Supabase (PostgreSQL)
-- **Authentication**: Supabase Auth
+- **Database**: Supabase (PostgreSQL) - for future game data
 - **Deployment**: Vercel
+- **Analytics**: Vercel Speed Insights
 
 ## Getting Started
 
 ### Prerequisites
-- Node.js 18+
-- npm or yarn
-- Supabase account
+- Node.js v24.10.0+ (uses `.nvmrc` for version locking)
+- npm v11.6.0+
 
 ### Installation
 
-1. Install dependencies
+1. Use the correct Node version
+```bash
+nvm use
+```
+
+2. Install dependencies
 ```bash
 npm install
 ```
 
-2. Set up environment variables
-```bash
-cp .env.example .env.local
-```
-
-Edit `.env.local` and add your Supabase credentials:
-```env
-NEXT_PUBLIC_SUPABASE_URL=your-project-url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
-```
-
-3. Set up the database
-
-- Create a new Supabase project at [supabase.com](https://supabase.com)
-- Go to SQL Editor in your Supabase dashboard
-- Run the SQL from `supabase/schema.sql`
-
-4. Run the development server
+3. Run the development server
 ```bash
 npm run dev
 ```
 
 Visit [http://localhost:3000](http://localhost:3000)
 
+### Build for Production
+```bash
+npm run build
+npm run start
+```
+
 ## Project Structure
 
 ```
 shak.fun/
 ├── app/                      # Next.js app directory
-│   ├── auth/                 # Authentication pages
-│   ├── games/                # Games listing and individual games
-│   ├── profile/              # User profile page
-│   ├── leaderboard/          # Leaderboard page
+│   ├── games/                # Games listing page (games coming in Phase 2)
+│   ├── icon.png              # Favicon (watermelon logo)
+│   ├── globals.css           # Global styles with custom CSS variables
 │   ├── layout.tsx            # Root layout with header/footer
 │   └── page.tsx              # Homepage
 ├── components/               # React components
-│   ├── ui/                   # Reusable UI components
-│   ├── games/                # Game-related components
-│   └── auth/                 # Auth-related components
+│   ├── ui/                   # Reusable UI components (Button, Card, Header, etc.)
+│   └── games/                # Game-related components (for Phase 2)
 ├── lib/                      # Utility functions and hooks
-│   ├── supabase/             # Supabase clients
 │   ├── hooks/                # Custom React hooks
-│   └── utils/                # Helper functions
+│   └── utils/                # Helper functions (cn for classnames)
 ├── types/                    # TypeScript type definitions
-├── supabase/                 # Database schema and migrations
-└── public/                   # Static assets
+├── public/                   # Static assets
+│   └── logo.png              # Watermelon logo
+├── .nvmrc                    # Node version specification
+└── vercel.json               # Vercel deployment config
 ```
-
-## Database Schema
-
-### Tables
-- **profiles** - User profiles with points and stats
-- **games** - Game catalog with metadata
-- **scores** - User game scores and points earned
-- **achievements** - Achievement definitions
-- **user_achievements** - User-unlocked achievements
-
-See `supabase/schema.sql` and `SETUP.md` for full details.
 
 ## Design System
 
-### Colors
-- **Primary**: Blue (#3b82f6)
-- **Secondary**: Amber (#f59e0b)
-- **Accent**: Purple (#8b5cf6)
+### Colors (Watermelon-Inspired)
+- **Background**: Light grey (#fafafa)
+- **Foreground**: Dark grey (#1a1a1a)
+- **Primary**: Charcoal (#2d3748)
+- **Accent**: Coral red (#e63946) - from watermelon
+- **Success**: Light green (#74c69d) - from watermelon rind
+- **Melon Green**: Dark green (#1a4d2e)
 
-### Style
-- Retro-inspired shadows and borders
-- Smooth animations and transitions
-- Modern gradient backgrounds
-- Nostalgic 2005 game portal aesthetic
+### Logo
+- Pixelated watermelon slice
+- Palestinian flag colors (red, white, green, black)
+- Displays with crisp pixel rendering (`image-rendering: pixelated`)
 
-## Adding Games
+### Typography
+- System font stack for performance
+- Font weights: 400 (normal), 500 (medium), 600 (semibold)
 
-Games are React components in `components/games/`. Each game should:
-1. Accept `onGameEnd(score: number)` callback prop
-2. Handle its own game logic and rendering
-3. Call callback when game completes
+### Style Philosophy
+- **Minimal**: Clean, uncluttered interfaces inspired by neal.fun
+- **Accessible**: WCAG 2.1 AA compliant, neurodivergent-friendly
+- **Fast**: 75ms transitions for instant feel
+- **Thoughtful**: Every element has purpose, no decoration for decoration's sake
+- **Pixel Art**: Crisp edges, retro gaming aesthetic
 
-See `SETUP.md` for detailed instructions.
+## Adding Games (Phase 2)
+
+Games will be React components in `components/games/`. Planned approach:
+- Self-contained game logic
+- Minimal dependencies
+- Accessible controls
+- Thoughtful, creative gameplay
+- No scores/points needed (free play)
+
+Details will be refined in Phase 2.
 
 ## Deployment
 
-Deploy to Vercel (already configured):
+The site auto-deploys to Vercel when pushing to `master` branch.
 
+**Live Site**: [shakfun.vercel.app](https://shakfun.vercel.app)
+
+Manual deployment (if needed):
 ```bash
-vercel
+git push origin master
+# Vercel automatically deploys
 ```
 
-Make sure to add environment variables in Vercel dashboard.
+## Accessibility Features
 
-## Charity Mission
+- **Skip to content** link for keyboard users
+- **ARIA labels** and semantic HTML throughout
+- **Reduced motion** support via `prefers-reduced-motion`
+- **High contrast** text for readability
+- **Focus indicators** on all interactive elements
+- **Screen reader** friendly component structure
 
-100% of proceeds from this platform go to charitable causes. Our goal is to make gaming a force for good.
+## Future Plans
+
+- **Phase 2**: Build creative, thoughtful games
+- **Phase 3**: Add optional charitable giving integration
+- Keep it simple, keep it free, keep it accessible
 
 ---
 
-Built with ❤️ for charity
+Made with purpose. Every pixel has meaning.
