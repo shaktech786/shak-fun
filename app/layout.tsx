@@ -4,8 +4,8 @@ import { Header } from "@/components/ui/Header";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
-  title: "Shak.Fun - Play Games for Good",
-  description: "Play thoughtful games and support charity. Earn points, compete with others, and make a difference.",
+  title: "Shak.Fun - Thoughtful Games",
+  description: "A relaxing collection of creative, pixelated games. No ads, no accounts, no distractions. Just play.",
 };
 
 export default function RootLayout({

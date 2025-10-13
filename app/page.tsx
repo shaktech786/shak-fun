@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowRight, Sparkles, Heart } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
@@ -7,7 +8,19 @@ export default function Home() {
   return (
     <div className="container mx-auto px-6 max-w-6xl">
       {/* Hero Section */}
-      <section className="text-center py-20 md:py-32 animate-fade">
+      <section className="text-center py-20 md:py-32 animate-fade relative">
+        {/* Subtle decorative pixel element */}
+        <div className="absolute top-8 right-8 opacity-10 pointer-events-none hidden md:block">
+          <Image
+            src="/logo.svg"
+            alt=""
+            width={80}
+            height={80}
+            className="pixelated"
+            aria-hidden="true"
+          />
+        </div>
+
         <h1 className="text-5xl md:text-7xl font-semibold text-foreground leading-tight mb-6">
           Play thoughtful games,<br />completely free
         </h1>
@@ -47,10 +60,10 @@ export default function Home() {
               <Heart className="text-accent" size={24} />
             </div>
             <h3 className="text-lg font-semibold text-foreground">
-              Play for Good
+              Made with Purpose
             </h3>
             <p className="text-primary-light text-sm leading-relaxed">
-              Future plans to support charitable causes. For now, just enjoy the games.
+              Every pixel has meaning. Games that bring joy while staying thoughtful.
             </p>
           </div>
         </Card>

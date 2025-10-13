@@ -139,3 +139,61 @@ body {
 .accent-underline:hover::after {
   transform: scaleX(1);
 }
+
+/* Pixelated rendering for crisp edges */
+.pixelated {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+/* Subtle pixel pattern background */
+@keyframes pixel-drift {
+  0%, 100% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 2px 2px;
+  }
+}
+
+/* Optional: Add subtle pixel texture to cards on hover */
+.pixel-texture:hover {
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 1px,
+      rgba(102, 126, 234, 0.02) 1px,
+      rgba(102, 126, 234, 0.02) 2px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 1px,
+      rgba(102, 126, 234, 0.02) 1px,
+      rgba(102, 126, 234, 0.02) 2px
+    );
+}
+
+/* Pixelated decorative element */
+.pixel-badge {
+  position: relative;
+  overflow: visible;
+}
+
+.pixel-badge::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  opacity: 0;
+  transition: opacity 150ms ease-out;
+}
+
+.pixel-badge:hover::before {
+  opacity: 0.5;
+}
