@@ -1,88 +1,58 @@
-import Link from 'next/link'
-import { ArrowRight, Sparkles, Heart } from 'lucide-react'
-import { Button } from '@/components/ui/Button'
-import { Card } from '@/components/ui/Card'
+'use client'
+
+import { Gamepad2 } from 'lucide-react'
+import { useGames } from '@/lib/hooks/useGames'
+import { GameCard } from '@/components/games/GameCard'
+import { LoadingSpinner } from '@/components/ui/LoadingSpinner'
+import { EmptyState } from '@/components/ui/EmptyState'
 
 export default function Home() {
+  const { games, loading, error } = useGames()
+
+  if (loading) {
+    return (
+      <div className="container mx-auto px-6 py-12">
+        <LoadingSpinner />
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className="container mx-auto px-6 py-12">
+        <EmptyState
+          icon={<Gamepad2 size={32} />}
+          title="Something went wrong"
+          description="Unable to load games. Please try again later."
+        />
+      </div>
+    )
+  }
+
   return (
-    <div className="container mx-auto px-6 max-w-6xl">
-      {/* Hero Section */}
-      <section className="text-center py-20 md:py-32 animate-fade">
-        <h1 className="text-5xl md:text-7xl font-semibold text-foreground leading-tight mb-6">
-          Play thoughtful games,<br />completely free
+    <div className="container mx-auto px-6 py-12 max-w-6xl">
+      <div className="mb-12 animate-fade">
+        <h1 className="text-4xl md:text-5xl font-semibold text-foreground mb-3">
+          Shak.Fun
         </h1>
-        <p className="text-xl md:text-2xl text-primary-light max-w-2xl mx-auto mb-10 leading-relaxed">
-          A relaxing collection of creative games. No ads, no accounts, no distractions.
+        <p className="text-lg text-primary-light">
+          Thoughtful games to play at your own pace.
         </p>
+      </div>
 
-        <div className="flex justify-center">
-          <Link href="/games">
-            <Button size="lg">
-              Browse Games
-              <ArrowRight className="ml-2" size={18} />
-            </Button>
-          </Link>
+      {games.length === 0 ? (
+        <EmptyState
+          icon={<Gamepad2 size={32} />}
+          title="Games coming soon"
+          description="We're building creative experiences for you. Check back soon!"
+        />
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {games.map((game) => (
+            <GameCard key={game.id} game={game} />
+          ))}
         </div>
-      </section>
-
-      {/* Features Grid */}
-      <section className="py-16 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-        <Card className="text-center">
-          <div className="flex flex-col items-center space-y-4">
-            <div className="w-12 h-12 bg-accent-soft rounded-full flex items-center justify-center">
-              <Sparkles className="text-accent" size={24} />
-            </div>
-            <h3 className="text-lg font-semibold text-foreground">
-              Thoughtful Design
-            </h3>
-            <p className="text-primary-light text-sm leading-relaxed">
-              Each game is crafted to be engaging without being addictive. Play mindfully.
-            </p>
-          </div>
-        </Card>
-
-        <Card className="text-center">
-          <div className="flex flex-col items-center space-y-4">
-            <div className="w-12 h-12 bg-accent-soft rounded-full flex items-center justify-center">
-              <Heart className="text-accent" size={24} />
-            </div>
-            <h3 className="text-lg font-semibold text-foreground">
-              Play for Good
-            </h3>
-            <p className="text-primary-light text-sm leading-relaxed">
-              Future plans to support charitable causes. For now, just enjoy the games.
-            </p>
-          </div>
-        </Card>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 text-center">
-        <Card className="bg-accent-soft/30 border-accent/20">
-          <div className="py-8 space-y-6">
-            <h2 className="text-3xl md:text-4xl font-semibold text-foreground">
-              More games coming soon
-            </h2>
-            <p className="text-lg text-primary-light max-w-xl mx-auto">
-              This is just the beginning. Check back often for new creative experiences.
-            </p>
-          </div>
-        </Card>
-      </section>
-
-      {/* Simple Stats */}
-      <section className="py-16 pb-24">
-        <div className="grid grid-cols-2 gap-8 text-center max-w-md mx-auto">
-          <div>
-            <p className="text-4xl font-semibold text-foreground mb-2">0</p>
-            <p className="text-sm text-primary-light">Games Available</p>
-          </div>
-          <div>
-            <p className="text-4xl font-semibold text-foreground mb-2">100%</p>
-            <p className="text-sm text-primary-light">Free Forever</p>
-          </div>
-        </div>
-      </section>
+      )}
     </div>
   )
 }
