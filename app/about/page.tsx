@@ -70,7 +70,7 @@ export default function AboutPage() {
 
           <div className="pt-6 border-t border-card-border">
             <p className="text-sm text-primary-light italic">
-              "Every pixel has meaning."
+              &ldquo;Every pixel has meaning.&rdquo;
             </p>
           </div>
         </div>
