@@ -2,26 +2,14 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useAuth } from '@/lib/hooks/useAuth'
-import { PointsDisplay } from './PointsDisplay'
-import { Button } from './Button'
-import { createClient } from '@/lib/supabase/client'
 import { cn } from '@/lib/utils/cn'
 
 export function Header() {
   const pathname = usePathname()
-  const { user, profile, loading } = useAuth()
-  const supabase = createClient()
-
-  const handleSignOut = async () => {
-    await supabase.auth.signOut()
-    window.location.href = '/'
-  }
 
   const navLinks = [
-    { href: '/games', label: 'Games' },
-    { href: '/leaderboard', label: 'Leaderboard' },
-    { href: '/profile', label: 'Profile', authRequired: true }
+    { href: '/', label: 'Home' },
+    { href: '/games', label: 'Games' }
   ]
 
   return (
@@ -36,8 +24,6 @@ export function Header() {
 
           <div className="flex items-center gap-8">
             {navLinks.map((link) => {
-              if (link.authRequired && !user) return null
-
               const isActive = pathname === link.href
 
               return (
@@ -58,29 +44,15 @@ export function Header() {
             })}
           </div>
 
-          <div className="flex items-center gap-3">
-            {loading ? (
-              <div className="w-20 h-8 bg-hover-bg animate-pulse rounded" aria-label="Loading" />
-            ) : user && profile ? (
-              <>
-                <PointsDisplay points={profile.points} size="md" />
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={handleSignOut}
-                  aria-label="Sign out of your account"
-                >
-                  Sign Out
-                </Button>
-              </>
-            ) : (
-              <Link href="/auth/login">
-                <Button size="sm" aria-label="Sign in to your account">
-                  Sign In
-                </Button>
-              </Link>
-            )}
-          </div>
+          <a
+            href="https://github.com/shaktech786/shak-fun"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm text-primary-light hover:text-foreground transition-colors"
+            aria-label="View source code on GitHub"
+          >
+            GitHub
+          </a>
         </div>
       </nav>
     </header>

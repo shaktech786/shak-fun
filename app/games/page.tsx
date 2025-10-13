@@ -36,13 +36,13 @@ export default function GamesPage() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-12">
-      <div className="mb-8 animate-slide-in">
-        <h1 className="text-4xl md:text-5xl font-bold gradient-text mb-3">
-          Game Arcade
+    <div className="container mx-auto px-6 py-12 max-w-6xl">
+      <div className="mb-12 animate-fade">
+        <h1 className="text-4xl md:text-5xl font-semibold text-foreground mb-3">
+          Games
         </h1>
-        <p className="text-lg text-foreground/70">
-          Choose your adventure and start playing!
+        <p className="text-lg text-primary-light">
+          Thoughtful games to play at your own pace.
         </p>
       </div>
 
