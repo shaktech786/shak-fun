@@ -85,48 +85,54 @@ export default function LoginPage() {
         </div>
 
         {error && (
-          <div className="bg-danger/10 border-2 border-danger rounded-lg p-4 mb-6">
-            <p className="text-danger text-sm">{error}</p>
+          <div className="bg-danger/10 border border-danger/30 rounded-lg p-4 mb-6" role="alert">
+            <p className="text-danger text-sm font-medium">{error}</p>
           </div>
         )}
 
         {message && (
-          <div className="bg-success/10 border-2 border-success rounded-lg p-4 mb-6">
-            <p className="text-success text-sm">{message}</p>
+          <div className="bg-success/10 border border-success/30 rounded-lg p-4 mb-6" role="status">
+            <p className="text-success text-sm font-medium">{message}</p>
           </div>
         )}
 
         <form onSubmit={handleEmailLogin} className="space-y-4 mb-6">
           <div>
-            <label className="block text-sm font-semibold text-foreground mb-2">
-              Email
+            <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
+              Email address
             </label>
             <div className="relative">
-              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-foreground/50" size={18} />
+              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-primary-light pointer-events-none" size={18} aria-hidden="true" />
               <input
+                id="email"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 bg-background border-2 border-card-border rounded-lg focus:border-primary focus:outline-none text-foreground"
+                className="w-full pl-10 pr-4 py-3 bg-background border border-card-border rounded-lg focus:border-accent focus:ring-2 focus:ring-accent/20 focus:outline-none text-foreground transition-colors"
                 placeholder="your@email.com"
+                autoComplete="email"
                 required
+                aria-required="true"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-foreground mb-2">
+            <label htmlFor="password" className="block text-sm font-medium text-foreground mb-2">
               Password
             </label>
             <div className="relative">
-              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-foreground/50" size={18} />
+              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-primary-light pointer-events-none" size={18} aria-hidden="true" />
               <input
+                id="password"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 bg-background border-2 border-card-border rounded-lg focus:border-primary focus:outline-none text-foreground"
-                placeholder="••••••••"
+                className="w-full pl-10 pr-4 py-3 bg-background border border-card-border rounded-lg focus:border-accent focus:ring-2 focus:ring-accent/20 focus:outline-none text-foreground transition-colors"
+                placeholder="Enter your password"
+                autoComplete="current-password"
                 required
+                aria-required="true"
               />
             </div>
           </div>

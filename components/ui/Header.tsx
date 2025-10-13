@@ -25,10 +25,10 @@ export function Header() {
   ]
 
   return (
-    <header className="border-b border-card-border bg-white/80 backdrop-blur-sm sticky top-0 z-50">
-      <nav className="container mx-auto px-6 py-4">
+    <header className="border-b border-card-border bg-white/80 backdrop-blur-sm sticky top-0 z-50" role="banner">
+      <nav className="container mx-auto px-6 py-4" role="navigation" aria-label="Main navigation">
         <div className="flex items-center justify-between max-w-7xl mx-auto">
-          <Link href="/" className="flex items-center gap-2 group">
+          <Link href="/" className="flex items-center gap-2 group" aria-label="Shak.Fun home">
             <span className="text-2xl font-medium text-foreground accent-underline">
               Shak.Fun
             </span>
@@ -50,6 +50,7 @@ export function Header() {
                       ? 'text-foreground'
                       : 'text-primary-light hover:text-foreground'
                   )}
+                  aria-current={isActive ? 'page' : undefined}
                 >
                   {link.label}
                 </Link>
@@ -59,7 +60,7 @@ export function Header() {
 
           <div className="flex items-center gap-3">
             {loading ? (
-              <div className="w-20 h-8 bg-hover-bg animate-pulse rounded" />
+              <div className="w-20 h-8 bg-hover-bg animate-pulse rounded" aria-label="Loading" />
             ) : user && profile ? (
               <>
                 <PointsDisplay points={profile.points} size="md" />
@@ -67,13 +68,14 @@ export function Header() {
                   variant="ghost"
                   size="sm"
                   onClick={handleSignOut}
+                  aria-label="Sign out of your account"
                 >
                   Sign Out
                 </Button>
               </>
             ) : (
               <Link href="/auth/login">
-                <Button size="sm">
+                <Button size="sm" aria-label="Sign in to your account">
                   Sign In
                 </Button>
               </Link>

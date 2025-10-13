@@ -15,11 +15,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased">
+        <a href="#main-content" className="skip-to-content">
+          Skip to main content
+        </a>
         <Header />
-        <main className="min-h-screen">
+        <main id="main-content" className="min-h-screen" role="main">
           {children}
         </main>
-        <footer className="border-t border-card-border mt-20">
+        <footer className="border-t border-card-border mt-20" role="contentinfo">
           <div className="container mx-auto px-6 py-12 max-w-6xl">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-primary-light">
               <p>Made for good. 100% of proceeds support charitable causes.</p>
