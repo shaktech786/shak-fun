@@ -1,16 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  /* Light, airy palette inspired by calm spaces */
+  /* Light, airy palette with subtle watermelon-inspired accents */
   --background: #fafafa;
   --foreground: #1a1a1a;
   --primary: #2d3748;
   --primary-light: #4a5568;
-  --accent: #667eea;
-  --accent-soft: #e3e8ff;
-  --success: #48bb78;
-  --danger: #f56565;
+  --accent: #e63946;
+  --accent-soft: #ffe8e9;
+  --success: #74c69d;
+  --danger: #e63946;
   --warm: #f6ad55;
+  --melon-green: #1a4d2e;
+  --melon-green-light: #74c69d;
+  --melon-red: #e63946;
   --card-bg: #ffffff;
   --card-border: #e8e8e8;
   --hover-bg: #f7f7f7;
@@ -26,6 +29,9 @@
   --color-success: var(--success);
   --color-danger: var(--danger);
   --color-warm: var(--warm);
+  --color-melon-green: var(--melon-green);
+  --color-melon-green-light: var(--melon-green-light);
+  --color-melon-red: var(--melon-red);
   --color-card-bg: var(--card-bg);
   --color-card-border: var(--card-border);
   --color-hover-bg: var(--hover-bg);
@@ -138,4 +144,11 @@ body {
 
 .accent-underline:hover::after {
   transform: scaleX(1);
+}
+
+/* Pixelated image rendering for logo */
+.pixelated {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
 }

@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils/cn'
 
@@ -16,8 +17,16 @@ export function Header() {
     <header className="border-b border-card-border bg-white/80 backdrop-blur-sm sticky top-0 z-50" role="banner">
       <nav className="container mx-auto px-6 py-4" role="navigation" aria-label="Main navigation">
         <div className="flex items-center justify-between max-w-7xl mx-auto">
-          <Link href="/" className="flex items-center gap-2 group" aria-label="Shak.Fun home">
-            <span className="text-2xl font-medium text-foreground accent-underline">
+          <Link href="/" className="flex items-center gap-3 group" aria-label="Shak.Fun home">
+            <Image
+              src="/logo.png"
+              alt=""
+              width={32}
+              height={32}
+              className="pixelated transition-transform duration-200 group-hover:scale-110"
+              priority
+            />
+            <span className="text-2xl font-medium text-foreground">
               Shak.Fun
             </span>
           </Link>
