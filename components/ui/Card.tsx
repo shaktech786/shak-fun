@@ -11,7 +11,7 @@ export function Card({ children, className, hover = false }: CardProps) {
   return (
     <div
       className={cn(
-        'bg-card-bg border border-card-border rounded-2xl p-6 soft-shadow pixel-texture transition-all',
+        'bg-card-bg border border-card-border rounded-2xl p-6 soft-shadow',
         hover && 'hover-lift cursor-pointer',
         className
       )}
