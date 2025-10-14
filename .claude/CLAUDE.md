@@ -1,10 +1,13 @@
 # Shak.Fun - Project Memory for Claude Code
 
-## Project Overview
-
-**Shak.Fun** is a thoughtful game portal inspired by neal.fun but with its own creative identity. This is NOT a clone—it's an experimental space for unique, accessible, AI-powered web experiences.
+**⚡ Quick Start:** Read `CONTEXT_QUICK.md` first (token-optimized)
+**📚 Full Context:** See `/docs` directory if needed
 
 ---
+
+## Project Overview
+
+**Shak.Fun** = unique, accessible, AI-powered games that reduce anxiety (NOT a neal.fun clone)
 
 ## Critical Context
 
