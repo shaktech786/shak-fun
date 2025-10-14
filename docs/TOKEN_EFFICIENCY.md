@@ -404,4 +404,29 @@ Detect similar requests:
 
 ---
 
+## Practical Examples
+
+### Integration Tests
+See `tests/integration/token-manager.test.ts` for comprehensive tests demonstrating:
+- Caching behavior and cache hits
+- Daily content pattern
+- Efficient prompt building
+- Batch request optimization
+- Real-world game content generation
+
+### React Component Examples
+See `components/examples/TokenManagerExample.tsx` for practical implementations:
+- **DailyWisdomExample**: Content generated once per day (99% savings)
+- **GameIntroExample**: Per-game cached content (99%+ savings)
+- **PersonalizedHintExample**: Per-user session caching (95%+ savings)
+- **VariationExample**: Pre-generated variations (zero runtime cost)
+
+Each example includes:
+- Complete working code
+- Cache duration strategies
+- Fallback handling
+- Best practices commentary
+
+---
+
 **Remember:** Every token saved is money saved AND a faster user experience.
