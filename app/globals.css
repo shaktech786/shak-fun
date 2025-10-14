@@ -83,6 +83,20 @@ body {
   animation: gentle-fade 0.4s ease-out;
 }
 
+/* Slide-in animation for accessibility panel */
+@keyframes slide-in {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in {
+  animation: slide-in 0.2s ease-out;
+}
+
 .hover-lift {
   transition: transform 75ms ease-in-out, box-shadow 75ms ease-in-out;
 }

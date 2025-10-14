@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Header } from "@/components/ui/Header";
+import { AccessibilityControls } from "@/components/accessibility/AccessibilityControls";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
@@ -31,6 +32,7 @@ export default function RootLayout({
             </div>
           </div>
         </footer>
+        <AccessibilityControls />
         <SpeedInsights />
       </body>
     </html>
