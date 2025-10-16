@@ -1,4 +1,4 @@
-# Shak.Fun - Thoughtful Games
+# VeryGoodMelon.Fun - Thoughtful Games
 
 A relaxing collection of creative, pixelated games. Inspired by neal.fun and classic game portals, built with modern web technologies. No ads, no accounts, no distractions - just thoughtful games.
 
@@ -60,7 +60,7 @@ npm run start
 ## Project Structure
 
 ```
-shak.fun/
+verygoodmelon.fun/
 ├── app/                      # Next.js app directory
 │   ├── games/                # Games listing page (games coming in Phase 2)
 │   ├── icon.png              # Favicon (watermelon logo)
@@ -119,13 +119,13 @@ Details will be refined in Phase 2.
 
 ## Deployment
 
-The site auto-deploys to Vercel when pushing to `master` branch.
+The site auto-deploys to Vercel when pushing to `main` branch.
 
-**Live Site**: [shakfun.vercel.app](https://shakfun.vercel.app)
+**Live Site**: [verygoodmelon.fun](https://verygoodmelon.fun)
 
 Manual deployment (if needed):
 ```bash
-git push origin master
+git push origin main
 # Vercel automatically deploys
 ```
 

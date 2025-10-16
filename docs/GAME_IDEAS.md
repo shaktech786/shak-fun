@@ -1,4 +1,4 @@
-# Game Ideas for Shak.Fun
+# Game Ideas for VeryGoodMelon.Fun
 
 > 10 creative, accessible, AI-powered game concepts that reduce anxiety and add value.
 

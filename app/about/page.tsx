@@ -10,7 +10,7 @@ export default function AboutPage() {
 
         <div className="space-y-6 text-primary-light leading-relaxed">
           <p className="text-lg">
-            Shak.Fun is a side project by <span className="text-foreground font-medium">Shakeel Bhamani</span>,
+            VeryGoodMelon.Fun is a side project by <span className="text-foreground font-medium">Shakeel Bhamani</span>,
             a Lead Consultant at ThoughtWorks in Atlanta, Georgia.
           </p>
 

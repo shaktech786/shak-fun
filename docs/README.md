@@ -1,4 +1,4 @@
-# Shak.Fun Documentation
+# VeryGoodMelon.Fun Documentation
 
 > Centralized documentation for AI tools, developers, and contributors.
 
@@ -110,8 +110,8 @@ If any answer is "no" or "maybe" → Don't build it or fix it first.
 
 ## 🔗 External Resources
 
-- **Live Site:** https://shakfun.vercel.app
-- **GitHub Repo:** https://github.com/shaktech786/shak-fun
+- **Live Site:** https://verygoodmelon.fun
+- **GitHub Repo:** https://github.com/shakeelbhamani/verygoodmelon.fun
 - **Inspiration:** [neal.fun](https://neal.fun) (but we're not copying!)
 - **WCAG Guidelines:** [WCAG 2.1 AA](https://www.w3.org/WAI/WCAG21/quickref/)
 
@@ -131,7 +131,7 @@ When adding new documentation:
 
 ## 🎯 Project Goals Reminder
 
-**Shak.Fun exists to:**
+**VeryGoodMelon.Fun exists to:**
 - Create moments of calm in a chaotic world
 - Make accessibility delightful, not an afterthought
 - Use AI invisibly to create magical experiences

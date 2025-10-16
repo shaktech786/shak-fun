@@ -1,6 +1,6 @@
 # AI Integration Guide
 
-> How to use AI invisibly in Shak.Fun games
+> How to use AI invisibly in VeryGoodMelon.Fun games
 
 ## Philosophy: Invisible Magic
 

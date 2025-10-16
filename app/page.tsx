@@ -33,10 +33,10 @@ export default function Home() {
     <div className="container mx-auto px-6 py-12 max-w-6xl">
       <div className="mb-12 animate-fade">
         <h1 className="text-4xl md:text-5xl font-semibold text-foreground mb-3">
-          Shak.Fun
+          VeryGoodMelon.Fun
         </h1>
         <p className="text-lg text-primary-light">
-          Thoughtful games to play at your own pace.
+          Thoughtful games to help you relax.
         </p>
       </div>
 

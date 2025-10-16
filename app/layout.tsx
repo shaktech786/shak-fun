@@ -5,8 +5,8 @@ import { AccessibilityControls } from "@/components/accessibility/AccessibilityC
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
-  title: "Shak.Fun - Play Games for Good",
-  description: "Play thoughtful games and support charity. Earn points, compete with others, and make a difference.",
+  title: "VeryGoodMelon.Fun - Thoughtful Games to Reduce Anxiety",
+  description: "Creative, accessible, AI-powered games designed to help you relax. No ads, no accounts, no stress - just thoughtful experiences.",
 };
 
 export default function RootLayout({
@@ -27,8 +27,8 @@ export default function RootLayout({
         <footer className="border-t border-card-border mt-20" role="contentinfo">
           <div className="container mx-auto px-6 py-12 max-w-6xl">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-primary-light">
-              <p>Made for good. 100% of proceeds support charitable causes.</p>
-              <p>© 2025 Shak.Fun</p>
+              <p>Made with purpose. Every pixel has meaning.</p>
+              <p>© 2025 VeryGoodMelon.Fun</p>
             </div>
           </div>
         </footer>

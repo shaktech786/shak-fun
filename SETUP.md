@@ -1,4 +1,4 @@
-# Shak.Fun Setup Guide
+# VeryGoodMelon.Fun Setup Guide
 
 ## Prerequisites
 - Node.js 18+

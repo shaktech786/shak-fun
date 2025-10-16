@@ -1,6 +1,6 @@
 # Token Efficiency Guide
 
-> Keeping AI costs low for Shak.Fun
+> Keeping AI costs low for VeryGoodMelon.Fun
 
 ## Overview
 

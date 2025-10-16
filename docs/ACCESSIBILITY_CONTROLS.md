@@ -6,7 +6,7 @@
 
 ## Overview
 
-Every game on Shak.Fun includes a **unified accessibility control panel** that allows users to customize their experience. These controls respect neurodivergent needs and provide granular control without overwhelming the user.
+Every game on VeryGoodMelon.Fun includes a **unified accessibility control panel** that allows users to customize their experience. These controls respect neurodivergent needs and provide granular control without overwhelming the user.
 
 ---
 
@@ -210,7 +210,7 @@ interface AccessibilitySettings {
 ```
 
 ### Storage Key
-`shakfun:accessibility:settings`
+`verygoodmelon:accessibility:settings`
 
 ### Sync Behavior
 - Settings apply immediately on change

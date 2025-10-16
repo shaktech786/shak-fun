@@ -1,4 +1,4 @@
-# Shak.Fun - Project Memory for Claude Code
+# VeryGoodMelon.Fun - Project Memory for Claude Code
 
 **⚡ Quick Start:** Read `CONTEXT_QUICK.md` first (token-optimized)
 **📚 Full Context:** See `/docs` directory if needed
@@ -7,7 +7,9 @@
 
 ## Project Overview
 
-**Shak.Fun** = unique, accessible, AI-powered games that reduce anxiety (NOT a neal.fun clone)
+**VeryGoodMelon.Fun** = unique, accessible, AI-powered games that reduce anxiety (NOT a neal.fun clone)
+
+**Origin**: The name is a pun on VeryGoodPizza (the creator's gaming channel), keeping the watermelon theme.
 
 ## Critical Context
 
@@ -23,7 +25,7 @@ This project demands **exceptionally high standards** in:
 > "Inspired by neal.fun, but not copying it."
 
 - **Neal.fun** = educational data visualizations
-- **Shak.Fun** = creative, artistic, interactive experiences
+- **VeryGoodMelon.Fun** = creative, artistic, interactive experiences
 - Focus on **feeling and exploration** over facts and learning
 - More personal, more experimental, more unique
 
@@ -44,7 +46,7 @@ This is the #1 metric. Everything else serves this goal.
 
 ## Before Building Anything
 
-**ALWAYS** read `/Users/shakeelbhamani/projects/personal/shak.fun/DESIGN_PHILOSOPHY.md` first.
+**ALWAYS** read `DESIGN_PHILOSOPHY.md` first.
 
 It contains:
 - Core principles
@@ -277,7 +279,7 @@ export function Game({ onComplete }: GameProps) {
 
 ### Deployment
 - **Auto-deploy**: Push to `main` → Vercel deploys
-- **URL**: https://shakfun.vercel.app
+- **URL**: https://verygoodmelon.fun
 - **Environment variables**: Set in Vercel dashboard
 
 ---

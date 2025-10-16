@@ -1,10 +1,10 @@
-# GitHub Copilot Instructions for Shak.Fun
+# GitHub Copilot Instructions for VeryGoodMelon.Fun
 
 > Context for GitHub Copilot when working on this project
 
 ## Project Context
 
-**Shak.Fun** creates unique, accessible, AI-powered games that reduce anxiety. Inspired by neal.fun but not copying it.
+**VeryGoodMelon.Fun** creates unique, accessible, AI-powered games that reduce anxiety. Inspired by neal.fun but not copying it.
 
 **Core Goal:** Users feel LESS ANXIOUS after visiting than before.
 

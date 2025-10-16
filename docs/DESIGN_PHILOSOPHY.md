@@ -1,10 +1,10 @@
-# Shak.Fun - Design Philosophy & Project Memory
+# VeryGoodMelon.Fun - Design Philosophy & Project Memory
 
 > "Every pixel has meaning."
 
 ## Project Vision
 
-Shak.Fun is a **diverse playground of unique web experiences** that prioritizes creativity, accessibility, and simplicity. Inspired by neal.fun but not a copy—this is a space where invisible AI creates magical moments, and every interaction respects users' attention and abilities.
+VeryGoodMelon.Fun is a **diverse playground of unique web experiences** that prioritizes creativity, accessibility, and simplicity. Inspired by neal.fun but not a copy—this is a space where invisible AI creates magical moments, and every interaction respects users' attention and abilities.
 
 ### The Experience
 
@@ -67,7 +67,7 @@ The emotional palette is **diverse, not singular**. Some games meditative, some 
 
 ### 7. **Inspired by Neal.Fun, Not Copying**
 - Neal.fun = educational/informational data visualization
-- Shak.Fun = creative/artistic interactive experiences
+- VeryGoodMelon.Fun = creative/artistic interactive experiences
 - Focus on feeling and exploration over learning
 - More personal, more experimental
 
@@ -122,7 +122,7 @@ The emotional palette is **diverse, not singular**. Some games meditative, some 
 
 ### Game Diversity (We Want It All)
 
-Shak.Fun is a **diverse playground**, not a single genre. Games should span:
+VeryGoodMelon.Fun is a **diverse playground**, not a single genre. Games should span:
 
 - 🔬 **Interactive Simulations** - Physics sandboxes, systems you can poke and prod
 - 🧩 **Thoughtful Puzzles** - Brain teasers that make you think differently
@@ -133,7 +133,7 @@ Shak.Fun is a **diverse playground**, not a single genre. Games should span:
 
 **Variety creates surprise.** Some games take 30 seconds, some take 10 minutes. Some make you think, some make you relax. The only constant: quality and accessibility.
 
-### What Makes a Good Shak.Fun Game?
+### What Makes a Good VeryGoodMelon.Fun Game?
 
 #### Must Have:
 - ✅ Unique concept or execution
@@ -216,7 +216,7 @@ Every game should include **intelligent, non-intrusive controls**:
 
 ## Quality Bar
 
-### "Does This Belong on Shak.Fun?" - Critical Questions
+### "Does This Belong on VeryGoodMelon.Fun?" - Critical Questions
 
 Before launching ANY game, ask these questions honestly:
 
@@ -232,7 +232,7 @@ Before launching ANY game, ask these questions honestly:
 - ❓ Is this more than a clone with different graphics?
 - ❓ What's the **unique twist** or innovation?
 - ❓ What **value does it add to the world**?
-- ❓ Would this exist if Shak.Fun didn't build it?
+- ❓ Would this exist if VeryGoodMelon.Fun didn't build it?
 
 **If it's just Flappy Bird with watermelons** → Scrap it.
 

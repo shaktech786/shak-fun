@@ -1,6 +1,6 @@
 # Development Guide
 
-> Setup, workflow, and standards for Shak.Fun development
+> Setup, workflow, and standards for VeryGoodMelon.Fun development
 
 ## Quick Start
 
@@ -46,7 +46,7 @@ GOOGLE_PROJECT_ID=your_project_id
 OPENAI_API_KEY=your_openai_key
 
 # Site Configuration
-NEXT_PUBLIC_SITE_NAME=Shak.Fun
+NEXT_PUBLIC_SITE_NAME=VeryGoodMelon.Fun
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
 ```
 
@@ -78,7 +78,7 @@ npm run type-check       # TypeScript type checking (if added)
 ## Project Structure
 
 ```
-shak.fun/
+verygoodmelon.fun/
 ├── app/                       # Next.js App Router
 │   ├── layout.tsx            # Root layout
 │   ├── page.tsx              # Homepage
@@ -371,7 +371,7 @@ Co-Authored-By: Claude <noreply@anthropic.com>
 
 ### Vercel (Production)
 - **Auto-deploy:** Push to `main` branch triggers deployment
-- **URL:** https://shakfun.vercel.app
+- **URL:** https://verygoodmelon.fun
 - **Environment variables:** Set in Vercel dashboard
 
 ### Environment Variables in Vercel
@@ -554,7 +554,7 @@ npm run dev -- -p 3001
 - **Screen Readers:** VoiceOver (Mac), NVDA (Windows)
 
 ### Community
-- **GitHub:** https://github.com/shaktech786/shak-fun
+- **GitHub:** https://github.com/shakeelbhamani/verygoodmelon.fun
 - **Issues:** Report bugs or request features
 
 ---

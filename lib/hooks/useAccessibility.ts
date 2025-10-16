@@ -15,7 +15,7 @@ import {
   ACCESSIBILITY_PRESETS,
 } from '@/types/accessibility'
 
-const STORAGE_KEY = 'shakfun:accessibility:settings'
+const STORAGE_KEY = 'verygoodmelon:accessibility:settings'
 
 /**
  * Load settings from localStorage

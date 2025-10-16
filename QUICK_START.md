@@ -2,7 +2,7 @@
 
 ## Infrastructure Complete! 🎉
 
-The Shak.Fun game portal infrastructure is ready. Here's what's been built:
+The VeryGoodMelon.Fun game portal infrastructure is ready. Here's what's been built:
 
 ### ✅ Completed Features
 
@@ -133,7 +133,7 @@ INSERT INTO games (
 ## Project Structure
 
 ```
-shak.fun/
+verygoodmelon.fun/
 ├── app/                 # Pages
 │   ├── page.tsx        # Homepage ✅
 │   ├── auth/           # Login/Signup ✅

@@ -1,10 +1,10 @@
 # AI Context - Quick Reference
 
-> One-page context for AI assistants working on Shak.Fun
+> One-page context for AI assistants working on VeryGoodMelon.Fun
 
 ## Project Overview
 
-**Shak.Fun** is a thoughtful game portal inspired by neal.fun but with its own identity. It creates unique, accessible, AI-powered web experiences that reduce anxiety and add genuine value.
+**VeryGoodMelon.Fun** is a thoughtful game portal inspired by neal.fun but with its own identity. It creates unique, accessible, AI-powered web experiences that reduce anxiety and add genuine value.
 
 **Core Success Metric:** Users feel LESS ANXIOUS when leaving than when they arrived.
 
@@ -124,7 +124,7 @@ export function MyComponent() {
 ## File Structure
 
 ```
-shak.fun/
+verygoodmelon.fun/
 ├── docs/                       # All documentation (you are here)
 │   ├── README.md              # Index
 │   ├── AI_CONTEXT.md          # This file

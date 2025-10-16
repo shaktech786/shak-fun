@@ -1,4 +1,4 @@
-# Shak.Fun - Quick Context (Token-Optimized)
+# VeryGoodMelon.Fun - Quick Context (Token-Optimized)
 
 ## Core
 **Goal:** Users feel LESS ANXIOUS after visiting
