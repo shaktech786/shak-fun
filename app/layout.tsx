@@ -3,6 +3,7 @@ import "./globals.css";
 import { Header } from "@/components/ui/Header";
 import { AccessibilityControls } from "@/components/accessibility/AccessibilityControls";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   title: "VeryGoodMelon.Fun - Thoughtful Games to Reduce Anxiety",
@@ -34,6 +35,7 @@ export default function RootLayout({
         </footer>
         <AccessibilityControls />
         <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );
