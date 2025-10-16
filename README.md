@@ -119,15 +119,32 @@ Details will be refined in Phase 2.
 
 ## Deployment
 
-The site auto-deploys to Vercel when pushing to `main` branch.
+### Branch Strategy
+- **`main`** → Production (https://verygoodmelon.fun)
+- **`dev`** → Preview environment (auto-deployed by Vercel)
+
+See [BRANCHING_STRATEGY.md](BRANCHING_STRATEGY.md) for complete workflow.
+
+### Development Workflow
+```bash
+# 1. Work on dev branch
+git checkout dev
+# Make changes
+git commit -m "Add feature"
+git push origin dev
+
+# 2. Test on Vercel preview
+# (Check preview URL in Vercel dashboard)
+
+# 3. Merge to production
+# Create PR: dev → main on GitHub
+# OR merge directly:
+git checkout main
+git merge dev
+git push origin main
+```
 
 **Live Site**: [verygoodmelon.fun](https://verygoodmelon.fun)
-
-Manual deployment (if needed):
-```bash
-git push origin main
-# Vercel automatically deploys
-```
 
 ## Accessibility Features
 
