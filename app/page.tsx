@@ -4,8 +4,8 @@ import Image from 'next/image'
 
 export default function Home() {
   return (
-    <div className="container mx-auto px-6 py-8 max-w-4xl">
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+    <div className="container mx-auto px-6 py-8 max-w-6xl">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
           {/* Bowling Game Card - Balatro-style Joker Card */}
           <Link
             href="/games/bowling"
@@ -40,32 +40,27 @@ export default function Home() {
             </div>
 
             {/* Play indicator that appears on hover */}
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2
+            <div className="absolute bottom-3 left-1/2 -translate-x-1/2
                           opacity-0 group-hover:opacity-100
                           transform translate-y-2 group-hover:translate-y-0
                           transition-all duration-300 ease-out
-                          bg-accent text-white px-6 py-3 rounded-full
-                          font-semibold text-sm shadow-lg
+                          bg-accent text-white px-4 py-2 rounded-full
+                          font-semibold text-xs shadow-lg
                           pointer-events-none">
-              Play Now →
+              Play →
             </div>
           </Link>
 
           {/* Coming Soon Card */}
-          <div className="bg-card-bg border-2 border-dashed border-card-border rounded-2xl p-8 opacity-60 flex flex-col justify-center items-center text-center aspect-[1024/1792]">
-            <div className="mb-6">
-              <div className="w-20 h-20 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-6">
-                <Gamepad2 size={40} className="text-primary" />
-              </div>
-              <h3 className="text-2xl font-semibold text-foreground mb-3">
-                More Jokers Coming
-              </h3>
-              <p className="text-sm text-primary-light mb-4">
-                New cards in the deck
-              </p>
+          <div className="bg-card-bg border-2 border-dashed border-card-border rounded-2xl p-4 opacity-60 flex flex-col justify-center items-center text-center aspect-[1024/1792]">
+            <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-3">
+              <Gamepad2 size={24} className="text-primary" />
             </div>
-            <p className="text-foreground/70 max-w-xs">
-              Each game is a unique joker card. Check back soon for more creative experiences!
+            <h3 className="text-sm font-semibold text-foreground mb-1">
+              More Coming
+            </h3>
+            <p className="text-xs text-primary-light">
+              Soon
             </p>
           </div>
         </div>
