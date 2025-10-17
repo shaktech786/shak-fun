@@ -4,25 +4,8 @@ import Image from 'next/image'
 
 export default function Home() {
   return (
-    <div className="container mx-auto px-6 py-12 max-w-6xl">
-      <div className="mb-12 animate-fade text-center">
-        <h1 className="text-4xl md:text-6xl font-semibold text-foreground mb-4">
-          VeryGoodMelon.Fun
-        </h1>
-        <p className="text-xl md:text-2xl text-primary-light mb-8">
-          Thoughtful games to help you relax.
-        </p>
-        <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-          Creative, accessible games designed to reduce anxiety. No ads, no accounts, no stress—just thoughtful experiences.
-        </p>
-      </div>
-
-      <div className="max-w-4xl mx-auto">
-        <h2 className="text-2xl font-semibold text-foreground mb-6 text-center">
-          Available Games
-        </h2>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+    <div className="container mx-auto px-6 py-8 max-w-4xl">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
           {/* Bowling Game Card - Balatro-style Joker Card */}
           <Link
             href="/games/bowling"
@@ -87,17 +70,5 @@ export default function Home() {
           </div>
         </div>
       </div>
-
-      <div className="mt-16 text-center">
-        <div className="inline-block bg-accent-soft rounded-lg px-6 py-4">
-          <p className="text-sm text-foreground/80 mb-2">
-            <strong>Our Philosophy:</strong>
-          </p>
-          <p className="text-foreground/70 max-w-lg">
-            Every game is designed to help you feel less anxious when leaving than when you arrived. Simple, creative, and meaningful.
-          </p>
-        </div>
-      </div>
-    </div>
   )
 }
