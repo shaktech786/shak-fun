@@ -7,6 +7,37 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 export const metadata: Metadata = {
   title: "VeryGoodMelon.Fun - Thoughtful Games to Reduce Anxiety",
   description: "Creative, accessible, AI-powered games designed to help you relax. No ads, no accounts, no stress - just thoughtful experiences.",
+  keywords: ["games", "relaxation", "anxiety relief", "accessible games", "creative games", "watermelon", "bowling"],
+  authors: [{ name: "VeryGoodMelon.Fun" }],
+  creator: "VeryGoodMelon.Fun",
+  publisher: "VeryGoodMelon.Fun",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://verygoodmelon.fun",
+    title: "VeryGoodMelon.Fun - Thoughtful Games to Reduce Anxiety",
+    description: "Creative, accessible games designed to help you relax. No ads, no accounts, no stress.",
+    siteName: "VeryGoodMelon.Fun",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "VeryGoodMelon.Fun - Thoughtful Games to Reduce Anxiety",
+    description: "Creative, accessible games designed to help you relax.",
+  },
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 5,
+  },
+  themeColor: "#e63946",
 };
 
 export default function RootLayout({
