@@ -1,5 +1,6 @@
 import { Gamepad2 } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function Home() {
   return (
@@ -25,46 +26,50 @@ export default function Home() {
           {/* Bowling Game Card */}
           <Link
             href="/games/bowling"
-            className="block bg-card-bg border-2 border-card-border rounded-lg p-6 hover-lift transition-all"
+            className="block bg-card-bg border-2 border-card-border rounded-lg overflow-hidden hover-lift transition-all group"
           >
-            <div className="flex items-center gap-4 mb-4">
-              <div className="w-12 h-12 bg-accent rounded-lg flex items-center justify-center">
-                <span className="text-3xl">🍉</span>
-              </div>
-              <div>
-                <h3 className="text-xl font-semibold text-foreground">
+            <div className="relative w-full aspect-square">
+              <Image
+                src="/games/bowling/thumbnail.png"
+                alt="Watermelon Bowling Game - A watermelon rolling down a bowling lane"
+                fill
+                className="object-cover"
+                priority
+              />
+            </div>
+            <div className="p-6">
+              <div className="mb-3">
+                <h3 className="text-xl font-semibold text-foreground mb-1">
                   Watermelon Bowling
                 </h3>
                 <p className="text-sm text-primary-light">
                   Roll • Aim • Strike
                 </p>
               </div>
-            </div>
-            <p className="text-foreground/70 mb-4">
-              Roll a watermelon down the lane and knock down all the pins! Smooth physics, satisfying strikes, and relaxing gameplay.
-            </p>
-            <div className="flex items-center gap-2 text-sm text-accent font-medium">
-              <span>Play Now</span>
-              <span>→</span>
+              <p className="text-foreground/70 mb-4 text-sm">
+                Roll a watermelon down the lane and knock down all the pins! Smooth physics, satisfying strikes, and relaxing gameplay.
+              </p>
+              <div className="flex items-center gap-2 text-sm text-accent font-medium group-hover:gap-3 transition-all">
+                <span>Play Now</span>
+                <span>→</span>
+              </div>
             </div>
           </Link>
 
           {/* Coming Soon Card */}
-          <div className="bg-card-bg border-2 border-dashed border-card-border rounded-lg p-6 opacity-60">
-            <div className="flex items-center gap-4 mb-4">
-              <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
-                <Gamepad2 size={24} className="text-primary" />
+          <div className="bg-card-bg border-2 border-dashed border-card-border rounded-lg p-6 opacity-60 flex flex-col justify-center items-center text-center min-h-[400px]">
+            <div className="mb-6">
+              <div className="w-16 h-16 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <Gamepad2 size={32} className="text-primary" />
               </div>
-              <div>
-                <h3 className="text-xl font-semibold text-foreground">
-                  More Games Coming
-                </h3>
-                <p className="text-sm text-primary-light">
-                  Stay tuned
-                </p>
-              </div>
+              <h3 className="text-xl font-semibold text-foreground mb-2">
+                More Games Coming
+              </h3>
+              <p className="text-sm text-primary-light mb-4">
+                Stay tuned
+              </p>
             </div>
-            <p className="text-foreground/70">
+            <p className="text-foreground/70 max-w-xs">
               We&apos;re building more creative experiences for you. Check back soon!
             </p>
           </div>
