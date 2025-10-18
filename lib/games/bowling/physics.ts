@@ -24,23 +24,27 @@ export interface Pin {
   fallen: boolean
 }
 
-const FRICTION = 0.98
+const FRICTION = 0.985
 const GRAVITY = 0.5
 const BOUNCE_DAMPING = 0.7
-const ROTATION_SPEED = 0.1
+const ROTATION_SPEED = 0.05
 
 export function updateBall(ball: Ball, deltaTime: number): Ball {
-  // Apply friction
-  const newVx = ball.vx * FRICTION
-  const newVy = ball.vy * FRICTION
+  // Normalize deltaTime for consistent physics (target 60fps)
+  const dt = deltaTime / 60
+
+  // Apply friction (per frame)
+  const frictionFactor = Math.pow(FRICTION, dt)
+  const newVx = ball.vx * frictionFactor
+  const newVy = ball.vy * frictionFactor
 
   // Update position
-  const newX = ball.x + newVx * deltaTime
-  const newY = ball.y + newVy * deltaTime
+  const newX = ball.x + newVx * dt
+  const newY = ball.y + newVy * dt
 
   // Update rotation based on velocity
   const speed = Math.sqrt(newVx * newVx + newVy * newVy)
-  const newRotation = ball.rotation + speed * ROTATION_SPEED
+  const newRotation = ball.rotation + speed * ROTATION_SPEED * dt
 
   return {
     ...ball,
@@ -57,17 +61,21 @@ export function updatePin(pin: Pin, deltaTime: number): Pin {
     return pin
   }
 
+  // Normalize deltaTime for consistent physics
+  const dt = deltaTime / 60
+
   // Apply friction to fallen pins
-  const newVx = pin.vx * FRICTION
-  const newVy = pin.vy * FRICTION
+  const frictionFactor = Math.pow(FRICTION, dt)
+  const newVx = pin.vx * frictionFactor
+  const newVy = pin.vy * frictionFactor
 
   // Update position
-  const newX = pin.x + newVx * deltaTime
-  const newY = pin.y + newVy * deltaTime
+  const newX = pin.x + newVx * dt
+  const newY = pin.y + newVy * dt
 
   // Update rotation
   const speed = Math.sqrt(newVx * newVx + newVy * newVy)
-  const newRotation = pin.rotation + speed * ROTATION_SPEED * 2
+  const newRotation = pin.rotation + speed * ROTATION_SPEED * 2 * dt
 
   return {
     ...pin,
@@ -100,6 +108,16 @@ export function resolveBallPinCollision(ball: Ball, pin: Pin): { ball: Ball; pin
   const nx = dx / distance
   const ny = dy / distance
 
+  // Separate overlapping objects
+  const overlap = (ball.radius + pin.radius) - distance
+  const separationX = nx * overlap * 0.5
+  const separationY = ny * overlap * 0.5
+
+  const newBallX = ball.x - separationX
+  const newBallY = ball.y - separationY
+  const newPinX = pin.x + separationX
+  const newPinY = pin.y + separationY
+
   // Relative velocity
   const dvx = ball.vx - pin.vx
   const dvy = ball.vy - pin.vy
@@ -110,29 +128,36 @@ export function resolveBallPinCollision(ball: Ball, pin: Pin): { ball: Ball; pin
   // Do not resolve if velocities are separating
   if (dotProduct > 0) return { ball, pin }
 
-  // Calculate impulse
-  const impulse = 2 * dotProduct / 2 // Equal mass assumption
+  // Restitution (bounciness)
+  const restitution = 0.5
 
-  // Apply impulse to ball (lighter impact on ball)
-  const newBallVx = ball.vx - impulse * nx * 0.3
-  const newBallVy = ball.vy - impulse * ny * 0.3
+  // Calculate impulse (ball is heavier)
+  const ballMass = 2.0
+  const pinMass = 0.5
+  const impulse = -(1 + restitution) * dotProduct / (1/ballMass + 1/pinMass)
 
-  // Apply impulse to pin (heavier impact on pin)
-  const newPinVx = pin.vx + impulse * nx * 0.7
-  const newPinVy = pin.vy + impulse * ny * 0.7
+  // Apply impulse
+  const newBallVx = ball.vx + (impulse * nx) / ballMass
+  const newBallVy = ball.vy + (impulse * ny) / ballMass
+  const newPinVx = pin.vx - (impulse * nx) / pinMass
+  const newPinVy = pin.vy - (impulse * ny) / pinMass
 
   // Check if pin should fall
   const pinSpeed = Math.sqrt(newPinVx * newPinVx + newPinVy * newPinVy)
-  const shouldFall = pinSpeed > 0.5 || pin.fallen
+  const shouldFall = pinSpeed > 1.5 || pin.fallen
 
   return {
     ball: {
       ...ball,
+      x: newBallX,
+      y: newBallY,
       vx: newBallVx,
       vy: newBallVy
     },
     pin: {
       ...pin,
+      x: newPinX,
+      y: newPinY,
       vx: newPinVx,
       vy: newPinVy,
       fallen: shouldFall
@@ -151,6 +176,16 @@ export function resolvePinPinCollision(pin1: Pin, pin2: Pin): { pin1: Pin; pin2:
   const nx = dx / distance
   const ny = dy / distance
 
+  // Separate overlapping objects
+  const overlap = (pin1.radius + pin2.radius) - distance
+  const separationX = nx * overlap * 0.5
+  const separationY = ny * overlap * 0.5
+
+  const newPin1X = pin1.x - separationX
+  const newPin1Y = pin1.y - separationY
+  const newPin2X = pin2.x + separationX
+  const newPin2Y = pin2.y + separationY
+
   // Relative velocity
   const dvx = pin1.vx - pin2.vx
   const dvy = pin1.vy - pin2.vy
@@ -161,14 +196,15 @@ export function resolvePinPinCollision(pin1: Pin, pin2: Pin): { pin1: Pin; pin2:
   // Do not resolve if velocities are separating
   if (dotProduct > 0) return { pin1, pin2 }
 
-  // Calculate impulse (equal mass)
-  const impulse = dotProduct
+  // Restitution and impulse (equal mass)
+  const restitution = 0.4
+  const impulse = -(1 + restitution) * dotProduct / 2
 
   // Apply impulse
-  const newPin1Vx = pin1.vx - impulse * nx
-  const newPin1Vy = pin1.vy - impulse * ny
-  const newPin2Vx = pin2.vx + impulse * nx
-  const newPin2Vy = pin2.vy + impulse * ny
+  const newPin1Vx = pin1.vx + impulse * nx
+  const newPin1Vy = pin1.vy + impulse * ny
+  const newPin2Vx = pin2.vx - impulse * nx
+  const newPin2Vy = pin2.vy - impulse * ny
 
   // Check if pins should fall
   const pin1Speed = Math.sqrt(newPin1Vx * newPin1Vx + newPin1Vy * newPin1Vy)
@@ -177,15 +213,19 @@ export function resolvePinPinCollision(pin1: Pin, pin2: Pin): { pin1: Pin; pin2:
   return {
     pin1: {
       ...pin1,
+      x: newPin1X,
+      y: newPin1Y,
       vx: newPin1Vx,
       vy: newPin1Vy,
-      fallen: pin1Speed > 0.3 || pin1.fallen
+      fallen: pin1Speed > 1.0 || pin1.fallen
     },
     pin2: {
       ...pin2,
+      x: newPin2X,
+      y: newPin2Y,
       vx: newPin2Vx,
       vy: newPin2Vy,
-      fallen: pin2Speed > 0.3 || pin2.fallen
+      fallen: pin2Speed > 1.0 || pin2.fallen
     }
   }
 }

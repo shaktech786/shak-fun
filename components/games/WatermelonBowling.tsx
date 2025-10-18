@@ -26,15 +26,20 @@ export default function WatermelonBowling() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const animationRef = useRef<number>(0)
-  const [gameState, setGameState] = useState<GameState>('aiming')
-  const [score, setScore] = useState(0)
-  const [ball, setBall] = useState<Ball | null>(null)
-  const [pins, setPins] = useState<Pin[]>([])
-  const [aimStart, setAimStart] = useState<{ x: number; y: number } | null>(null)
-  const [aimEnd, setAimEnd] = useState<{ x: number; y: number } | null>(null)
-  const [message, setMessage] = useState<string>('')
+
+  // Use refs for game state to avoid re-renders during game loop
+  const gameStateRef = useRef<GameState>('aiming')
+  const scoreRef = useRef<number>(0)
+  const ballRef = useRef<Ball | null>(null)
+  const pinsRef = useRef<Pin[]>([])
+  const aimStartRef = useRef<{ x: number; y: number } | null>(null)
+  const aimEndRef = useRef<{ x: number; y: number } | null>(null)
+  const messageRef = useRef<string>('')
+  const messageTimeoutRef = useRef<NodeJS.Timeout | null>(null)
+
   const [soundEnabled, setSoundEnabled] = useState(true)
   const [canvasSize, setCanvasSize] = useState({ width: 800, height: 600 })
+  const [, forceUpdate] = useState({}) // For manual re-renders when needed
 
   const BALL_RADIUS = 20
   const BALL_START_Y_RATIO = 0.9
@@ -67,7 +72,7 @@ export default function WatermelonBowling() {
 
     // Initialize pins
     const newPins = initializePins(canvasSize.width / 2, canvasSize.height * 0.2, 40)
-    setPins(newPins)
+    pinsRef.current = newPins
 
     // Initialize ball at starting position
     const newBall: Ball = {
@@ -78,7 +83,7 @@ export default function WatermelonBowling() {
       radius: BALL_RADIUS,
       rotation: 0
     }
-    setBall(newBall)
+    ballRef.current = newBall
 
     soundManager.setEnabled(soundEnabled)
   }, [soundEnabled, canvasSize])
@@ -86,17 +91,25 @@ export default function WatermelonBowling() {
   // Game loop
   useEffect(() => {
     const canvas = canvasRef.current
-    if (!canvas || !ball) return
+    if (!canvas) return
 
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
-    let lastTime = Date.now()
+    let lastTime = performance.now()
 
-    const gameLoop = () => {
-      const currentTime = Date.now()
-      const deltaTime = Math.min((currentTime - lastTime) / 16.67, 2)
+    const gameLoop = (currentTime: number) => {
+      // Calculate delta time in milliseconds, cap to prevent huge jumps
+      const deltaTime = Math.min(currentTime - lastTime, 100)
       lastTime = currentTime
+
+      const ball = ballRef.current
+      const pins = pinsRef.current
+      const gameState = gameStateRef.current
+      const aimStart = aimStartRef.current
+      const aimEnd = aimEndRef.current
+      const message = messageRef.current
+      const score = scoreRef.current
 
       // Clear canvas
       ctx.clearRect(0, 0, canvasSize.width, canvasSize.height)
@@ -113,9 +126,9 @@ export default function WatermelonBowling() {
       }
 
       // Draw aiming line when aiming
-      if (gameState === 'aiming' && aimStart && aimEnd) {
-        const dx = aimEnd.x - aimStart.x
-        const dy = aimEnd.y - aimStart.y
+      if (gameState === 'aiming' && aimStart && aimEnd && ball) {
+        const dx = aimStart.x - aimEnd.x // Inverted for correct direction
+        const dy = aimStart.y - aimEnd.y
         const power = Math.sqrt(dx * dx + dy * dy)
         drawAimingLine(ctx, ball.x, ball.y, aimEnd.x, aimEnd.y, power)
       }
@@ -129,49 +142,56 @@ export default function WatermelonBowling() {
       }
 
       // Update game state
-      if (gameState === 'rolling' || gameState === 'settling') {
+      if ((gameState === 'rolling' || gameState === 'settling') && ball) {
         // Update ball
-        const newBall = updateBall(ball, deltaTime)
-        setBall(newBall)
+        let newBall = updateBall(ball, deltaTime)
 
         // Update pins
         let newPins = [...pins]
 
         // Check ball-pin collisions
+        let hasCollision = false
         newPins = newPins.map(pin => {
           if (checkCollision(newBall, pin)) {
             const result = resolveBallPinCollision(newBall, pin)
-            setBall(result.ball)
-            soundManager.play('pin-hit')
+            newBall = result.ball
+            if (!hasCollision) {
+              soundManager.play('pin-hit')
+              hasCollision = true
+            }
             return result.pin
           }
           return updatePin(pin, deltaTime)
         })
 
-        // Check pin-pin collisions
-        for (let i = 0; i < newPins.length; i++) {
-          for (let j = i + 1; j < newPins.length; j++) {
-            if (checkCollision(newPins[i], newPins[j])) {
-              const result = resolvePinPinCollision(newPins[i], newPins[j])
-              newPins[i] = result.pin1
-              newPins[j] = result.pin2
+        // Check pin-pin collisions (multiple iterations for stability)
+        for (let iteration = 0; iteration < 2; iteration++) {
+          for (let i = 0; i < newPins.length; i++) {
+            for (let j = i + 1; j < newPins.length; j++) {
+              if (checkCollision(newPins[i], newPins[j])) {
+                const result = resolvePinPinCollision(newPins[i], newPins[j])
+                newPins[i] = result.pin1
+                newPins[j] = result.pin2
+              }
             }
           }
         }
 
-        setPins(newPins)
+        // Update refs
+        ballRef.current = newBall
+        pinsRef.current = newPins
 
         // Check if ball has stopped or gone off screen
         const ballSpeed = Math.sqrt(newBall.vx * newBall.vx + newBall.vy * newBall.vy)
         const ballOffScreen = newBall.y < -100 || newBall.y > canvasSize.height + 100
 
-        if (gameState === 'rolling' && (ballSpeed < 0.1 || ballOffScreen)) {
-          setGameState('settling')
+        if (gameState === 'rolling' && (ballSpeed < 0.5 || ballOffScreen)) {
+          gameStateRef.current = 'settling'
 
           // Wait for pins to settle
           setTimeout(() => {
             calculateScore()
-            setGameState('finished')
+            gameStateRef.current = 'finished'
           }, 2000)
         }
       }
@@ -186,27 +206,33 @@ export default function WatermelonBowling() {
         cancelAnimationFrame(animationRef.current)
       }
     }
-  }, [ball, pins, gameState, aimStart, aimEnd, message, score, canvasSize])
+  }, [canvasSize])
 
   const calculateScore = useCallback(() => {
+    const pins = pinsRef.current
     const fallenPins = pins.filter(p => p.fallen).length
-    const newScore = score + fallenPins * 10
+    const newScore = scoreRef.current + fallenPins * 10
 
-    setScore(newScore)
+    scoreRef.current = newScore
 
     if (fallenPins === 10) {
-      setMessage('STRIKE! 🍉')
+      messageRef.current = 'STRIKE! 🍉'
       soundManager.play('strike')
     } else if (fallenPins > 0) {
-      setMessage(`${fallenPins} pins!`)
+      messageRef.current = `${fallenPins} pins!`
       soundManager.play('spare')
     } else {
-      setMessage('Gutter ball!')
+      messageRef.current = 'Gutter ball!'
       soundManager.play('gutter')
     }
 
-    setTimeout(() => setMessage(''), 2000)
-  }, [pins, score])
+    if (messageTimeoutRef.current) {
+      clearTimeout(messageTimeoutRef.current)
+    }
+    messageTimeoutRef.current = setTimeout(() => {
+      messageRef.current = ''
+    }, 2000)
+  }, [])
 
   const getCanvasCoordinates = (clientX: number, clientY: number) => {
     const canvas = canvasRef.current
@@ -220,43 +246,48 @@ export default function WatermelonBowling() {
   }
 
   const handlePointerStart = (clientX: number, clientY: number) => {
-    if (gameState !== 'aiming' || !ball) return
+    if (gameStateRef.current !== 'aiming' || !ballRef.current) return
 
     const coords = getCanvasCoordinates(clientX, clientY)
     if (!coords) return
 
-    setAimStart({ x: ball.x, y: ball.y })
-    setAimEnd(coords)
+    const ball = ballRef.current
+    aimStartRef.current = { x: ball.x, y: ball.y }
+    aimEndRef.current = coords
   }
 
   const handlePointerMove = (clientX: number, clientY: number) => {
-    if (gameState !== 'aiming' || !aimStart) return
+    if (gameStateRef.current !== 'aiming' || !aimStartRef.current) return
 
     const coords = getCanvasCoordinates(clientX, clientY)
     if (!coords) return
 
-    setAimEnd(coords)
+    aimEndRef.current = coords
   }
 
   const handlePointerEnd = () => {
-    if (gameState !== 'aiming' || !aimStart || !aimEnd || !ball) return
+    const aimStart = aimStartRef.current
+    const aimEnd = aimEndRef.current
+    const ball = ballRef.current
 
-    // Calculate velocity based on drag
-    const dx = aimEnd.x - aimStart.x
-    const dy = aimEnd.y - aimStart.y
+    if (gameStateRef.current !== 'aiming' || !aimStart || !aimEnd || !ball) return
 
-    const power = Math.min(Math.sqrt(dx * dx + dy * dy) / 10, 20)
+    // Calculate velocity based on drag (inverted for correct direction)
+    const dx = aimStart.x - aimEnd.x
+    const dy = aimStart.y - aimEnd.y
+
+    const power = Math.min(Math.sqrt(dx * dx + dy * dy) / 8, 25)
     const angle = Math.atan2(dy, dx)
 
-    setBall({
+    ballRef.current = {
       ...ball,
       vx: Math.cos(angle) * power,
       vy: Math.sin(angle) * power
-    })
+    }
 
-    setGameState('rolling')
-    setAimStart(null)
-    setAimEnd(null)
+    gameStateRef.current = 'rolling'
+    aimStartRef.current = null
+    aimEndRef.current = null
 
     soundManager.play('roll')
   }
@@ -297,7 +328,7 @@ export default function WatermelonBowling() {
   const handleReset = () => {
     // Reset pins
     const newPins = initializePins(canvasSize.width / 2, canvasSize.height * 0.2, 40)
-    setPins(newPins)
+    pinsRef.current = newPins
 
     // Reset ball
     const newBall: Ball = {
@@ -308,10 +339,11 @@ export default function WatermelonBowling() {
       radius: BALL_RADIUS,
       rotation: 0
     }
-    setBall(newBall)
+    ballRef.current = newBall
 
-    setGameState('aiming')
-    setMessage('')
+    gameStateRef.current = 'aiming'
+    messageRef.current = ''
+    scoreRef.current = 0
   }
 
   const toggleSound = () => {
@@ -332,8 +364,8 @@ export default function WatermelonBowling() {
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
           onMouseLeave={() => {
-            setAimStart(null)
-            setAimEnd(null)
+            aimStartRef.current = null
+            aimEndRef.current = null
           }}
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
