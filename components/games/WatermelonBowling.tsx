@@ -37,7 +37,7 @@ export default function WatermelonBowling() {
   const messageRef = useRef<string>('')
   const messageTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
-  const [soundEnabled, setSoundEnabled] = useState(true)
+  const [soundEnabled, setSoundEnabled] = useState(false)
   const [canvasSize, setCanvasSize] = useState({ width: 800, height: 600 })
   const [, forceUpdate] = useState({}) // For manual re-renders when needed
 
@@ -126,11 +126,11 @@ export default function WatermelonBowling() {
       }
 
       // Draw aiming line when aiming
-      if (gameState === 'aiming' && aimStart && aimEnd && ball) {
-        const dx = aimStart.x - aimEnd.x // Inverted for correct direction
-        const dy = aimStart.y - aimEnd.y
+      if (gameState === 'aiming' && aimStart && aimEnd) {
+        const dx = aimEnd.x - aimStart.x
+        const dy = aimEnd.y - aimStart.y
         const power = Math.sqrt(dx * dx + dy * dy)
-        drawAimingLine(ctx, ball.x, ball.y, aimEnd.x, aimEnd.y, power)
+        drawAimingLine(ctx, aimStart.x, aimStart.y, aimEnd.x, aimEnd.y, power)
       }
 
       // Draw score
@@ -251,8 +251,8 @@ export default function WatermelonBowling() {
     const coords = getCanvasCoordinates(clientX, clientY)
     if (!coords) return
 
-    const ball = ballRef.current
-    aimStartRef.current = { x: ball.x, y: ball.y }
+    // Start aiming from where user clicks
+    aimStartRef.current = coords
     aimEndRef.current = coords
   }
 
@@ -272,11 +272,21 @@ export default function WatermelonBowling() {
 
     if (gameStateRef.current !== 'aiming' || !aimStart || !aimEnd || !ball) return
 
-    // Calculate velocity based on drag (inverted for correct direction)
-    const dx = aimStart.x - aimEnd.x
-    const dy = aimStart.y - aimEnd.y
+    // Calculate velocity: drag in direction you want ball to go
+    const dx = aimEnd.x - aimStart.x
+    const dy = aimEnd.y - aimStart.y
 
-    const power = Math.min(Math.sqrt(dx * dx + dy * dy) / 8, 25)
+    const distance = Math.sqrt(dx * dx + dy * dy)
+
+    // Require minimum drag distance
+    if (distance < 10) {
+      aimStartRef.current = null
+      aimEndRef.current = null
+      return
+    }
+
+    // Scale power based on drag distance
+    const power = Math.min(distance / 10, 15)
     const angle = Math.atan2(dy, dx)
 
     ballRef.current = {

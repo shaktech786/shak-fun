@@ -4,8 +4,8 @@ export type SoundEffect = 'roll' | 'pin-hit' | 'strike' | 'spare' | 'gutter'
 
 class SoundManager {
   private audioContext: AudioContext | null = null
-  private enabled: boolean = true
-  private volume: number = 0.5
+  private enabled: boolean = false
+  private volume: number = 0.15
 
   private initAudioContext() {
     if (!this.audioContext && typeof window !== 'undefined') {
@@ -55,7 +55,7 @@ class SoundManager {
     filter.frequency.value = filterFreq
 
     const gainNode = this.audioContext.createGain()
-    gainNode.gain.setValueAtTime(this.volume * 0.3, this.audioContext.currentTime)
+    gainNode.gain.setValueAtTime(this.volume * 0.15, this.audioContext.currentTime)
     gainNode.gain.exponentialRampToValueAtTime(0.01, this.audioContext.currentTime + duration)
 
     noise.connect(filter)
@@ -68,37 +68,29 @@ class SoundManager {
   play(name: SoundEffect) {
     switch (name) {
       case 'roll':
-        // Low rumbling sound
-        this.playNoise(0.3, 200)
-        this.playTone(60, 0.3, 'triangle')
+        // Subtle low rumble
+        this.playNoise(0.15, 150)
         break
 
       case 'pin-hit':
-        // Sharp impact sound
-        this.playNoise(0.1, 2000)
-        this.playTone(200, 0.1, 'square')
+        // Quick impact
+        this.playNoise(0.05, 1500)
+        this.playTone(220, 0.05, 'sine')
         break
 
       case 'strike':
-        // Celebratory ascending tones
-        setTimeout(() => this.playTone(262, 0.15, 'sine'), 0)    // C
-        setTimeout(() => this.playTone(330, 0.15, 'sine'), 100)  // E
-        setTimeout(() => this.playTone(392, 0.15, 'sine'), 200)  // G
-        setTimeout(() => this.playTone(523, 0.3, 'sine'), 300)   // C (high)
+        // Single pleasant tone
+        this.playTone(523, 0.2, 'sine')
         break
 
       case 'spare':
-        // Pleasant chord
-        this.playTone(262, 0.2, 'sine')  // C
-        this.playTone(330, 0.2, 'sine')  // E
-        this.playTone(392, 0.2, 'sine')  // G
+        // Short pleasant tone
+        this.playTone(392, 0.15, 'sine')
         break
 
       case 'gutter':
-        // Descending sad tones
-        setTimeout(() => this.playTone(330, 0.15, 'sine'), 0)
-        setTimeout(() => this.playTone(294, 0.15, 'sine'), 150)
-        setTimeout(() => this.playTone(247, 0.3, 'sine'), 300)
+        // Very subtle descending tone
+        this.playTone(294, 0.15, 'sine')
         break
     }
   }
