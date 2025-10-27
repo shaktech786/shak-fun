@@ -1,9 +1,7 @@
 import { Gamepad2 } from 'lucide-react'
 import SiteVisitCounter from '@/components/SiteVisitCounter'
-import { GameCardShowcase, GameCardPlaceholder } from '@/components/games/GameCardShowcase'
+import { GameCardShowcase } from '@/components/games/GameCardShowcase'
 import { SHOWCASE_GAMES } from '@/lib/games/config'
-import fs from 'fs'
-import path from 'path'
 
 /**
  * Homepage - Game Showcase
@@ -18,23 +16,13 @@ export default function Home() {
 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
         {/* Render all showcase games from config */}
-        {SHOWCASE_GAMES.map((game, index) => {
-          // Check if card image exists (server-side only)
-          // Hard Choices may not have card.png yet, use placeholder
-          const cardExists = fs.existsSync(
-            path.join(process.cwd(), 'public', game.cardImage)
-          )
-
-          return cardExists ? (
-            <GameCardShowcase
-              key={game.id}
-              game={game}
-              priority={index < 2} // Prioritize first 2 for LCP
-            />
-          ) : (
-            <GameCardPlaceholder key={game.id} game={game} />
-          )
-        })}
+        {SHOWCASE_GAMES.map((game, index) => (
+          <GameCardShowcase
+            key={game.id}
+            game={game}
+            priority={index < 2} // Prioritize first 2 for LCP
+          />
+        ))}
 
         {/* Coming Soon Card */}
         <div className="bg-card-bg border-2 border-dashed border-card-border rounded-2xl p-4 opacity-60 flex flex-col justify-center items-center text-center aspect-[1024/1792]">
