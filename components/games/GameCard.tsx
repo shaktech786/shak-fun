@@ -9,11 +9,14 @@ interface GameCardProps {
 }
 
 export function GameCard({ game }: GameCardProps) {
-  const difficultyColors = {
+  const difficultyColors: Record<string, 'success' | 'warning' | 'danger'> = {
     easy: 'success' as const,
     medium: 'warning' as const,
     hard: 'danger' as const
   }
+
+  const difficulty = game.difficulty || 'medium'
+  const difficultyVariant = difficultyColors[difficulty] || 'warning'
 
   return (
     <Link href={`/games/${game.slug}`}>
@@ -32,8 +35,8 @@ export function GameCard({ game }: GameCardProps) {
             <h3 className="font-semibold text-base text-foreground line-clamp-1">
               {game.title}
             </h3>
-            <Badge variant={difficultyColors[game.difficulty]}>
-              {game.difficulty}
+            <Badge variant={difficultyVariant}>
+              {difficulty}
             </Badge>
           </div>
 
