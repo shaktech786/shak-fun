@@ -29,7 +29,8 @@ export function useGames() {
     }
 
     fetchGames()
-  }, [])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []) // supabase client is stable, doesn't need to be in deps
 
   return { games, loading, error }
 }
@@ -59,7 +60,8 @@ export function useGame(slug: string) {
     }
 
     fetchGame()
-  }, [slug])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [slug]) // supabase client is stable, doesn't need to be in deps
 
   return { game, loading, error }
 }

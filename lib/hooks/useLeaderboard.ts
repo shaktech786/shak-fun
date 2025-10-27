@@ -7,8 +7,8 @@ interface LeaderboardEntry {
   id: string
   username: string
   avatar_url: string | null
-  points: number
-  total_games_played: number
+  points: number | null
+  total_games_played: number | null
 }
 
 export function useLeaderboard(limit = 10) {
@@ -36,7 +36,8 @@ export function useLeaderboard(limit = 10) {
     }
 
     fetchLeaderboard()
-  }, [limit])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [limit]) // supabase client is stable, doesn't need to be in deps
 
   return { leaderboard, loading, error }
 }

@@ -9,7 +9,7 @@
  * - Request deduplication
  */
 
-import { generateText, generateTextStream } from './gemini'
+import { generateText } from './gemini'
 
 // Token budgets (approximate, Gemini doesn't expose exact counts)
 const TOKEN_BUDGETS = {
@@ -40,7 +40,8 @@ interface CacheEntry<T> {
 }
 
 class TokenManager {
-  private memoryCache = new Map<string, CacheEntry<any>>()
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private memoryCache = new Map<string, CacheEntry<any>>() // Generic cache stores heterogeneous types
   private requestCounts = {
     minute: 0,
     hour: 0,

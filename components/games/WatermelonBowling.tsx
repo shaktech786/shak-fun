@@ -39,7 +39,6 @@ export default function WatermelonBowling() {
 
   const [soundEnabled, setSoundEnabled] = useState(false)
   const [canvasSize, setCanvasSize] = useState({ width: 800, height: 600 })
-  const [, forceUpdate] = useState({}) // For manual re-renders when needed
 
   const BALL_RADIUS = 20
   const BALL_START_Y_RATIO = 0.9
@@ -206,7 +205,8 @@ export default function WatermelonBowling() {
         cancelAnimationFrame(animationRef.current)
       }
     }
-  }, [canvasSize])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [canvasSize]) // calculateScore is defined with useCallback, stable reference
 
   const calculateScore = useCallback(() => {
     const pins = pinsRef.current
@@ -363,7 +363,7 @@ export default function WatermelonBowling() {
   }
 
   return (
-    <div ref={containerRef} className="flex flex-col items-center gap-4 sm:gap-6 w-full">
+    <div ref={containerRef} className="flex flex-col items-center gap-3 sm:gap-4 w-full">
       <div className="relative w-full max-w-4xl">
         <canvas
           ref={canvasRef}
@@ -384,10 +384,10 @@ export default function WatermelonBowling() {
         />
       </div>
 
-      <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-center w-full max-w-md px-4">
+      <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 items-center w-full max-w-md px-4">
         <button
           onClick={handleReset}
-          className="w-full sm:w-auto px-6 py-3 bg-accent text-white rounded-lg font-medium hover:bg-accent/90 transition-colors"
+          className="w-full sm:w-auto px-4 py-2 sm:px-6 sm:py-3 bg-accent text-white rounded-lg font-medium hover:bg-accent/90 transition-colors text-sm sm:text-base"
           aria-label="Reset game"
         >
           New Game
@@ -395,18 +395,18 @@ export default function WatermelonBowling() {
 
         <button
           onClick={toggleSound}
-          className="w-full sm:w-auto px-6 py-3 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 transition-colors"
+          className="w-full sm:w-auto px-4 py-2 sm:px-6 sm:py-3 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 transition-colors text-sm sm:text-base"
           aria-label={soundEnabled ? 'Disable sound' : 'Enable sound'}
         >
           Sound: {soundEnabled ? 'ON' : 'OFF'}
         </button>
       </div>
 
-      <div className="text-sm text-foreground/60 text-center max-w-md px-4">
-        <p className="mb-2">
+      <div className="text-xs sm:text-sm text-foreground/60 text-center max-w-md px-4">
+        <p className="mb-1">
           <strong>How to play:</strong> Drag to aim, release to bowl!
         </p>
-        <p>
+        <p className="text-[10px] sm:text-xs">
           Knock down all 10 pins for a STRIKE! Each pin is worth 10 points.
         </p>
       </div>

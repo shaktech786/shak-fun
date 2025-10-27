@@ -154,7 +154,7 @@ export function AccessibilityPanel({ isOpen, onClose }: AccessibilityPanelProps)
               <select
                 value={settings.contrast}
                 onChange={(e) =>
-                  updateSetting('contrast', e.target.value as any)
+                  updateSetting('contrast', e.target.value as 'normal' | 'high' | 'extra-high')
                 }
                 className="
                   w-full px-3 py-2
@@ -182,7 +182,7 @@ export function AccessibilityPanel({ isOpen, onClose }: AccessibilityPanelProps)
                   step="0.5"
                   value={settings.animationSpeed}
                   onChange={(e) =>
-                    updateSetting('animationSpeed', Number(e.target.value) as any)
+                    updateSetting('animationSpeed', Number(e.target.value) as 0.5 | 1 | 1.5 | 2)
                   }
                   className="w-full accent-accent"
                 />
@@ -198,7 +198,7 @@ export function AccessibilityPanel({ isOpen, onClose }: AccessibilityPanelProps)
               <select
                 value={settings.colorblindMode}
                 onChange={(e) =>
-                  updateSetting('colorblindMode', e.target.value as any)
+                  updateSetting('colorblindMode', e.target.value as 'none' | 'deuteranopia' | 'protanopia' | 'tritanopia' | 'monochrome')
                 }
                 className="
                   w-full px-3 py-2

@@ -189,7 +189,6 @@ export function drawAimingLine(
 ) {
   const dx = endX - startX
   const dy = endY - startY
-  const distance = Math.sqrt(dx * dx + dy * dy)
 
   // Power indicator
   ctx.strokeStyle = `rgba(230, 57, 70, ${Math.min(power / 100, 0.8)})`

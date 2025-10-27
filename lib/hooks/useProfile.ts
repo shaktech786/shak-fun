@@ -36,7 +36,8 @@ export function useProfile(userId: string | undefined) {
     }
 
     fetchProfile()
-  }, [userId])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userId]) // supabase client is stable, doesn't need to be in deps
 
   const updateProfile = async (updates: ProfileUpdate) => {
     if (!userId) return
@@ -59,13 +60,15 @@ export function useProfile(userId: string | undefined) {
   const addPoints = async (points: number) => {
     if (!profile) return
 
-    await updateProfile({ points: profile.points + points })
+    const currentPoints = profile.points || 0
+    await updateProfile({ points: currentPoints + points })
   }
 
   const deductPoints = async (points: number) => {
     if (!profile) return
 
-    await updateProfile({ points: Math.max(0, profile.points - points) })
+    const currentPoints = profile.points || 0
+    await updateProfile({ points: Math.max(0, currentPoints - points) })
   }
 
   return { profile, loading, error, updateProfile, addPoints, deductPoints }

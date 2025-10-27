@@ -25,8 +25,6 @@ export interface Pin {
 }
 
 const FRICTION = 0.985
-const GRAVITY = 0.5
-const BOUNCE_DAMPING = 0.7
 const ROTATION_SPEED = 0.05
 
 export function updateBall(ball: Ball, deltaTime: number): Ball {

@@ -43,3 +43,6 @@ next-env.d.ts
 # MCP configuration (local paths)
 .mcp.json
 .env*.local
+avatar-generation.log
+mcp-servers/flux-pro/node_modules
+*.md

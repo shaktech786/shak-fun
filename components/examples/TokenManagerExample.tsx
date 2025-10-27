@@ -130,7 +130,7 @@ export function GameIntroExample({ gameId }: { gameId: string }) {
         } else {
           setIntro(result)
         }
-      } catch (error) {
+      } catch {
         setIntro('Welcome to a moment of peace. Explore at your own pace.')
       } finally {
         setLoading(false)
@@ -190,7 +190,7 @@ export function PersonalizedHintExample({
         setHint(result)
       }
       setShowHint(true)
-    } catch (error) {
+    } catch {
       setHint('Look carefully at the details around you.')
       setShowHint(true)
     }
